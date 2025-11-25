@@ -1,16 +1,38 @@
+//Example main.cpp
+//This supposes that city->step() calls the move method of each organism in the city
+//in a single pass causing each to perform all tasks that it can.
+
 #include <iostream>
+#include <chrono>
+#include <thread>
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+#include "lib/Organism.h"
+#include "lib/City.h"
+#include "lib/GameSpecs.h"
+#include "lib/Zombie.h"
+#include "lib/Human.h"
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
-    }
+using namespace std;
 
-    return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
+void ClearScreen()
+{
+    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
+
+int main() {
+    City *city = new City();
+    chrono:: milliseconds interval(INTERVAL);
+
+    while (city->hasDiversity()) { //while both humans and zombies exist
+        this_thread::sleep_for(interval);
+        ClearScreen();
+        city->step(); 
+        city->reset(); //resets moved flags
+        city->countOrganisms(Z or H goes here);// run once for each type
+        cout << *city; //prints city
+        cout << "GENERATION " << city->getGeneration() << endl;
+        cout << "HUMANS: " << city->countType(HUMAN_CH) << endl;
+        cout << "ZOMBIES: " << city->countType(ZOMBIE_CH) << endl;
+    }//end while
+}//end main
+
