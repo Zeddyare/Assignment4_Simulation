@@ -5,22 +5,22 @@
 #include "lib/Human.h"
 
 //Default constructor for a human
-Human() {
+Human::Human() {
 
 };
 
 //Constructor for a human within the city
-Human( City *city, int size) {
+Human::Human( City *city, int size) {
 
 };
 
 //Human virtual destructor
-~Human() {
+Human::~Human() {
 
 };
 
 //What a human does on its turn (can only move X or Y)
-void turn() {
+void Human::turn() {
 
 };
 

@@ -5,22 +5,22 @@
 #include "lib/Zombie.h"
 
 //Default constructor for zombie
-Zombie() {
+Zombie::Zombie() {
 
 };
 
 //Zombie constructor within city
-Zombie( City *city, int size ) {
+Zombie::Zombie( City *city, int size ) {
 
 };
 
 //Virtual zombie destructor
-virtual ~Zombie() {
+Zombie::~Zombie() {
 
 };
 
 //Zombie unique turn method (can move diagonally)
-void turn() {
+void Zombie::turn() {
 
 };
 
