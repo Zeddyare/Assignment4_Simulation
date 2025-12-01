@@ -30,7 +30,7 @@ void Zombie::turn() {
     int humanCt = 0;
     int humanPos[8][2]; //human position "grid" in relation to zombie, looks 8 directions up to 2 squares away
     int emptyCt = 0;
-    int emptyTargets[8][2];
+    int emptyTargets[8][2]; //Empty squares around zombie, updates while looking for humans to determine move
 
 
     //Looks for humans in 8 directions
@@ -41,14 +41,17 @@ void Zombie::turn() {
             if (nx < 0 || nx >= GRIDSIZE || ny < 0 || ny >= GRIDSIZE) continue;
             Organism *o = city->getOrganism(nx, ny);
             if (o && o->getChar() == HUMAN_CH) {
-                humanPos[humanCt][0] = nx;
-                humanPos[humanCt][1] = ny;
-                humanCt++; //If zombie finds any humans within range in 8 directions, adds to count
-            } else {
+                if (humanCt < 8) {
+                    humanPos[humanCt][0] = nx;
+                    humanPos[humanCt][1] = ny;
+                    ++humanCt;
+                }
+            } else if (o == nullptr) {
+                // only truly empty squares
                 if (emptyCt < 8) {
                     emptyTargets[emptyCt][0] = nx;
                     emptyTargets[emptyCt][1] = ny;
-                    emptyCt++;
+                    ++emptyCt;
                 }
             }
         }
@@ -63,14 +66,15 @@ void Zombie::turn() {
         delete city->getOrganism(tx, ty);
         city->setOrganism(nullptr, tx, ty); //Clears space
         //Move into cell
+        city->setOrganism(nullptr, oldX, oldY);
         city->setOrganism(this, tx, ty);
         setPosition(tx, ty);
         setMoved(true);
         starveCounter = 0;
         breedCounter++;
 
-        //For moving into empty squares
-         //If 8 steps reached zombie can convert a human in range
+
+        //If 8 steps reached zombie can convert a human in range
     } else if (humanCt > 0 && breedCounter >= ZOMBIE_BREED) {
         int idx = rand() % humanCt;
         int bx = humanPos[idx][0];
@@ -84,7 +88,8 @@ void Zombie::turn() {
         starveCounter = 0;
         breedCounter = 0;
 
-    } else if (emptyCt > 0) {
+        //For moving into empty squares
+    } else if (emptyCt > 0 && humanCt == 0) {
         int idx = rand() % emptyCt;
         int tx = emptyTargets[idx][0];
         int ty = emptyTargets[idx][1];
@@ -97,7 +102,7 @@ void Zombie::turn() {
         starveCounter++;
         breedCounter++;
 
-        //For no free spaces to move
+        //For no free spaces to move/no humans to eat
     } else {
         starveCounter++;
         breedCounter++;
@@ -112,7 +117,7 @@ void Zombie::turn() {
         city->setOrganism(h, x, y);
         h->setPosition(x, y);
         h->setMoved(true);
-        delete this;
+        delete this; //AI says to make sure that city step does not touch this after deletion
 
         return;
     }
