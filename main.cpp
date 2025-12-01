@@ -19,6 +19,7 @@ void ClearScreen()
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
 
+//Main driver
 int main() {
     City *city = new City();
     chrono:: milliseconds interval(INTERVAL);
