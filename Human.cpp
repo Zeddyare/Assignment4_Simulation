@@ -23,3 +23,8 @@ Human( City *city, int size) {
 void turn() {
 
 };
+
+//A human is created next to (X or Y only) an existing human that survives 3 steps
+void recruit() {
+
+}

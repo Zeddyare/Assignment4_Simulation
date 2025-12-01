@@ -1,31 +1,30 @@
-//
-// Created by zdrol on 2025-11-25.
-//
-
+// cpp
 #include "lib/Organism.h"
+#include "lib/GameSpecs.h"
 
-//Default constructor for organisms
-Organism() {
+Organism::Organism()
+    : x(0), y(0), size(1), moved(false), city(nullptr)
+{}
 
-};
+Organism::Organism( City *city_, int size_)
+    : x(0), y(0), size(size_), moved(false), city(city_)
+{}
 
-//Constructor for organism within city
-Organism( City *city, int size) {
+Organism::~Organism() {} //Overridden
 
-};
+int Organism::getX() const { return x; }
+int Organism::getY() const { return y; }
+void Organism::setPosition(int nx, int ny) { x = nx; y = ny; }
 
-//Oragnism virtual destructor
-~Organism() {
+bool Organism::hasMoved() const { return moved; }
+void Organism::setMoved(bool mv) { moved = mv; }
 
-};
-
-//Abstract turn method for Organism (Overridden by human and zombie)
-//Ensure moved property changes to true so they only move once per turn
-virtual void turn() = 0 {
-
-};
-
-//cout << operator override for organism
-ostream& operator<<( ostream &output, Organism *organism ) {
-
-};
+ostream& operator<<( ostream &output, Organism *organism )
+{
+    if (!organism) {
+        output << SPACE_CH;
+        return output;
+    }
+    output << organism->getChar();
+    return output;
+}
