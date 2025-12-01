@@ -7,7 +7,7 @@
 class Human : public Organism
 {
 protected:
-	int recruitCounter = HUMAN_BREED;
+	int recruitCounter; //= HUMAN_BREED;
 
 public:
 	Human(); 

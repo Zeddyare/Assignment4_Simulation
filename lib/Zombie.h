@@ -7,8 +7,8 @@
 class Zombie : public Organism
 {
 protected:
-	int breedCounter = ZOMBIE_BREED;
-	int starveCounter = ZOMBIE_STARVE;
+	int breedCounter; //= ZOMBIE_BREED;
+	int starveCounter; //= ZOMBIE_STARVE;
 public:
 	Zombie();
 	Zombie( City *city, int size );
