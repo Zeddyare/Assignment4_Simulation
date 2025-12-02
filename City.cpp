@@ -98,10 +98,10 @@ std::ostream& operator<<( std::ostream &output, City &city ) {
                 if (c == HUMAN_CH) city.col(HUMAN_COLOR);
                 else if (c == ZOMBIE_CH) city.col(ZOMBIE_COLOR);
                 else city.col(DASH_COLOR);
-                output << c;
+                output << c << ' ';
             } else {
                 city.col(DASH_COLOR);
-                output << SPACE_CH;
+                output << SPACE_CH << ' ';
             }
         }
         city.col(7); // reset to default color at end of line
