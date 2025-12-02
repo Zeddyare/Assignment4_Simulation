@@ -5,7 +5,7 @@
 const int GRIDSIZE = 20; // size of the square grid
 const int HUMAN_STARTCOUNT = 100; // initial Human count
 const int ZOMBIE_STARTCOUNT = 5; // initial Zombie count
-const int BUILDING_COUNT = 5;
+const int BUILDING_COUNT = 15; // buildings on map count
 const int HUMAN_BREED = 3; // steps until a Human breeds
 const int ZOMBIE_BREED = 8; // steps until a Zombie breeds
 const int ZOMBIE_STARVE = 3; // steps until a Zombie starves and converts back

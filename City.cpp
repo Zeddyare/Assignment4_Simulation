@@ -43,7 +43,7 @@ City::City() {
         }
     }
 
-    int buildGen = BUILDING_CH;
+    int buildGen = BUILDING_COUNT;
     while (buildGen > 0) {
         int bx = rand() % GRIDSIZE;
         int by = rand() % GRIDSIZE;
