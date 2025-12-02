@@ -9,6 +9,7 @@
 #include <chrono>
 #include <random>
 #include <algorithm>
+#include "lib/Building.h"
 
 //Default constructor for a human
 Human::Human()
@@ -46,7 +47,27 @@ void Human::turn() {
         int nx = ox + dirs[idx].first;
         int ny = oy + dirs[idx].second;
         if (nx < 0 || nx >= GRIDSIZE || ny < 0 || ny >= GRIDSIZE) continue;
-        if (city->getOrganism(nx, ny) == nullptr) { //Empty square only
+
+        Organism *target = city->getOrganism(nx, ny);
+
+        //Enter building if present
+        if (target && target->getChar() == BUILDING_CH) {
+            Building *b = static_cast<Building*>(target);
+            if (!b->isFull()) {
+                if (b->enter(this)) {
+                    city->setOrganism(nullptr, ox, oy);
+                    setInside(true);
+                    setHome(b);
+                    setPosition(nx, ny);
+                    setMoved(true);
+                }
+                break;
+            } else {
+                continue;
+            }
+        }
+
+        if (target == nullptr) { //Empty square only
             city->setOrganism(nullptr, ox, oy);
             city->setOrganism(this, nx, ny);
             setPosition(nx, ny); //Move into random empty square in range
@@ -54,6 +75,9 @@ void Human::turn() {
             break;
         }
     }
+
+    if (isInside()) return;
+
     recruitCounter++;
 
     //AI Refactor for safer checking/breed routine
@@ -65,7 +89,7 @@ void Human::turn() {
             int bx = cx + dirs[i].first;
             int by = cy + dirs[i].second;
             if (bx < 0 || bx >= GRIDSIZE || by < 0 || by >= GRIDSIZE) continue;
-            if (city->getOrganism(bx, by) == nullptr) { // correct target check
+            if (city->getOrganism(bx, by) == nullptr) {
                 auto *recruit = new Human(city, 1);
                 city->setOrganism(recruit, bx, by);
                 recruit->setPosition(bx, by);

@@ -3,7 +3,7 @@
 
 
 const int GRIDSIZE = 20; // size of the square grid
-const int HUMAN_STARTCOUNT = 100; // initial Human count
+const int HUMAN_STARTCOUNT = 50; // initial Human count
 const int ZOMBIE_STARTCOUNT = 5; // initial Zombie count
 const int BUILDING_COUNT = 15; // buildings on map count
 const int HUMAN_BREED = 3; // steps until a Human breeds
