@@ -27,8 +27,8 @@ public:
 	friend ostream& operator<<( ostream &output, City &city );
 	
 	void col(int c);   //for colors
-
-	int getGeneration();
+	bool hasDiversity(); //for ELE check
+	int getGeneration(); //for iteration tracking
 };
 
 #endif

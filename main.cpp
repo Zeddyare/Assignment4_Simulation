@@ -5,6 +5,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <windows.h>
 
 #include "lib/Organism.h"
 #include "lib/City.h"
@@ -16,7 +17,7 @@ using namespace std;
 
 void ClearScreen()
 {
-    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    system("CLS");
 }
 
 //Main driver
@@ -29,11 +30,15 @@ int main() {
         ClearScreen();
         city->step(); 
         city->reset(); //resets moved flags
-        city->countOrganisms(Z or H goes here);// run once for each type
+        // city->countOrganisms(ZOMBIE_CH);// run once for each type
+        // city->countOrganisms(HUMAN_CH);
         cout << *city; //prints city
         cout << "GENERATION " << city->getGeneration() << endl;
         cout << "HUMANS: " << city->countType(HUMAN_CH) << endl;
         cout << "ZOMBIES: " << city->countType(ZOMBIE_CH) << endl;
     }//end while
+
+
+    cout << "Extinction Level Event: ";
 }//end main
 
