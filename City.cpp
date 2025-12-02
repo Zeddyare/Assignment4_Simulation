@@ -8,6 +8,8 @@
 #include "lib/Zombie.h"
 #include <windows.h>
 
+#include "lib/Building.h"
+
 //Default Constructor
 City::City() {
 
@@ -40,9 +42,19 @@ City::City() {
             zombieGen--;
         }
     }
+
+    int buildGen = BUILDING_CH;
+    while (buildGen > 0) {
+        int bx = rand() % GRIDSIZE;
+        int by = rand() % GRIDSIZE;
+        if (grid[bx][by] == nullptr) {
+            auto *building = new Building(this, 1);
+            setOrganism(building, bx, by);
+            building->setPosition(bx, by);
+            buildGen--;
+        }
+    }
 };
-
-
 
 //Virtual destructor
 City::~City() {
@@ -97,6 +109,7 @@ std::ostream& operator<<( std::ostream &output, City &city ) {
                 char c = city.grid[i][j]->getChar();
                 if (c == HUMAN_CH) city.col(HUMAN_COLOR);
                 else if (c == ZOMBIE_CH) city.col(ZOMBIE_COLOR);
+                else if (c == BUILDING_CH) city.col(BUILDING_COLOR);
                 else city.col(DASH_COLOR);
                 output << c << ' ';
             } else {

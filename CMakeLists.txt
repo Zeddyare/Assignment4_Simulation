@@ -7,4 +7,5 @@ add_executable(Simulation main.cpp
         City.cpp
         Organism.cpp
         Human.cpp
-        Zombie.cpp)
+        Zombie.cpp
+        Building.cpp)
