@@ -125,14 +125,17 @@ void Zombie::turn() {
 
     //Starved conversion
     if (starveCounter >= ZOMBIE_STARVE) {
-        int x = getX();
-        int y = getY();
-        auto *h = new Human(city, 1);
-        city->setOrganism(nullptr, x, y);
-        city->setOrganism(h, x, y);
-        h->setPosition(x, y);
-        h->setMoved(true);
 
+        int percentage = rand() % starveCounter + 1;
+        if (percentage > 0 && percentage < (starveCounter/2)) {
+            int x = getX();
+            int y = getY();
+            auto *h = new Human(city, 1);
+            city->setOrganism(nullptr, x, y);
+            city->setOrganism(h, x, y);
+            h->setPosition(x, y);
+            h->setMoved(true);
+        }
         return;
     }
 };
