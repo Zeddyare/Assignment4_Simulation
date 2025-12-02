@@ -59,14 +59,16 @@ void Human::turn() {
     //AI Refactor for safer checking/breed routine
     if (recruitCounter >= HUMAN_BREED) {
         std::shuffle(order.begin(), order.end(), rng);
+        int cx = getX();
+        int cy = getY();
         for (int i : order) {
-            int nx = ox + dirs[i].first;
-            int ny = oy + dirs[i].second;
-            if (nx < 0 || nx >= GRIDSIZE || ny < 0 || ny >= GRIDSIZE) continue;
-            if (city->getOrganism(ox, oy) == nullptr) {
+            int bx = cx + dirs[i].first;
+            int by = cy + dirs[i].second;
+            if (bx < 0 || bx >= GRIDSIZE || by < 0 || by >= GRIDSIZE) continue;
+            if (city->getOrganism(bx, by) == nullptr) { // correct target check
                 auto *recruit = new Human(city, 1);
-                city->setOrganism(recruit, ox, oy);
-                recruit->setPosition(ox, oy);
+                city->setOrganism(recruit, bx, by);
+                recruit->setPosition(bx, by);
                 recruit->setMoved(true);
                 break;
             }

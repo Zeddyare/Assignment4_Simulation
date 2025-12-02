@@ -19,7 +19,7 @@ void Organism::setPosition(int nx, int ny) { x = nx; y = ny; }
 bool Organism::hasMoved() const { return moved; }
 void Organism::setMoved(bool mv) { moved = mv; }
 
-ostream& operator<<( ostream &output, Organism *organism )
+std::ostream& operator<<( std::ostream &output, Organism *organism )
 {
     if (!organism) {
         output << SPACE_CH;

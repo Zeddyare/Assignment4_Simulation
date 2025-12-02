@@ -90,7 +90,7 @@ int City::countType(char type) {
 };
 
 //Overrides cout << operator for city object
-ostream& operator<<( ostream &output, City &city ) {
+std::ostream& operator<<( std::ostream &output, City &city ) {
     for (int i = 0; i < GRIDSIZE; i++) {
         for (int j = 0; j < GRIDSIZE; j++) {
             if (city.grid[i][j]) {

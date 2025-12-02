@@ -4,7 +4,7 @@
 #include <iostream>
 #include "GameSpecs.h"
 
-using namespace std;
+
 
 class Organism;
 
@@ -24,7 +24,7 @@ public:
 	void step(); //includes all actions except reset, counting, and printing in this solution.
 	void reset();
 	int countType(char type);
-	friend ostream& operator<<( ostream &output, City &city );
+	friend std::ostream& operator<<( std::ostream &output, City &city );
 	
 	void col(int c);   //for colors
 	bool hasDiversity(); //for ELE check

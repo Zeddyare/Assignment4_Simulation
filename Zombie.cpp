@@ -104,7 +104,7 @@ void Zombie::turn() {
 
         //For moving into empty squares
     } else if (!empties.empty() && humans.empty()) {
-        size_t pick = pick_index(humans.size());
+        size_t pick = pick_index(empties.size());
         int tx = empties[pick].first;
         int ty = empties[pick].second;
 
@@ -128,10 +128,10 @@ void Zombie::turn() {
         int x = getX();
         int y = getY();
         auto *h = new Human(city, 1);
+        city->setOrganism(nullptr, x, y);
         city->setOrganism(h, x, y);
         h->setPosition(x, y);
         h->setMoved(true);
-        delete this; //AI says to make sure that city step does not touch this after deletion
 
         return;
     }

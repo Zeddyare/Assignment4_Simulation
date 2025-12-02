@@ -4,8 +4,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 class City;
 
 class Organism
@@ -34,7 +32,7 @@ public:
 	bool hasMoved() const;
 	void setMoved(bool mv);
 
-	friend ostream& operator<<( ostream &output, Organism *organism );
+	friend std::ostream& operator<<( std::ostream &output, Organism *organism );
 };
 
 #endif
